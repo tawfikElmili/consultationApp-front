@@ -26,18 +26,18 @@ export class UserService {
   };
 
   login(login: loginModel): Observable<any> {
-    return this.http.post(environment.endpoint + '/api/users/login', login)
+    return this.http.post(environment.endpoint + '/users/login', login)
       .pipe(retry(1), catchError(this.processError));
   }
   register(register: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(environment.endpoint + '/users',
+    return this.http.post<UserModel>(environment.endpoint + '/users/register',
       JSON.stringify(register),
       this.httpHeader
     )
       .pipe(retry(1), catchError(this.processError));
   }
   getAllUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(this.getAllUserUrl, this.options)
+    return this.http.get<UserModel[]>(environment.endpoint + '/users/getAll', this.options)
       .pipe(retry(1), catchError(this.processError));
   }
 

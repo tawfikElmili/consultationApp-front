@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private userService: UserService, private router: Router) {
     this.register = new UserModel();
   }
 
@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.submitted = true;
+    console.log(this.register)
     if (form.valid) {
       this.userService.register(this.register).subscribe((res: UserModel) => {
         const resSTR = JSON.stringify(res);
