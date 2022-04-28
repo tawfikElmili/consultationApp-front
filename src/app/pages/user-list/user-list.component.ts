@@ -1,4 +1,7 @@
+import { UserModel } from './../../shared/models/UserModel';
+import { UserService } from './../../shared/Services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  userlist: UserModel[] = [];
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.getAllUsers().subscribe((res: UserModel[]) => {
+      this.userlist = res;
+    });
+  }
+
+  oChangeUserStatus(item: UserModel) {
+    this.userService.oChangeUserStatus(item.id).subscribe((data) => {
+    });
   }
 
 }

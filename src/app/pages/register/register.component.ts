@@ -32,16 +32,15 @@ export class RegisterComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      this.userService.register(this.register).subscribe(data => {
-        const resSTR = JSON.stringify(data);
+      this.userService.register(this.register).subscribe((res: UserModel) => {
+        const resSTR = JSON.stringify(res);
         const resJSON = JSON.parse(resSTR);
         if (resJSON.status === 'ok') {
           form.reset();
           this.router.navigate(['/login']);
         }
-
-      }, error => {
-      });
+      }
+      );
     }
   }
 
