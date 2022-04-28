@@ -14,13 +14,14 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe((res: UserModel[]) => {
+    this.userService.getAllUsers().subscribe((res) => {
+      console.log(res)
       this.userlist = res;
     });
   }
 
   oChangeUserStatus(item: UserModel) {
-    this.userService.oChangeUserStatus(item.id).subscribe((data) => {
+    this.userService.oChangeUserStatus(item._id).subscribe((data) => {
     });
   }
 

@@ -36,9 +36,9 @@ export class UserService {
     )
       .pipe(retry(1), catchError(this.processError));
   }
-  getAllUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(environment.endpoint + '/users/getAll', this.options)
-      .pipe(retry(1), catchError(this.processError));
+    getAllUsers() : Observable<UserModel[]>  {
+    return this.http.post<UserModel[]>(environment.endpoint + '/users/getAll', this.httpHeader)
+     .pipe(retry(1), catchError(this.processError));
   }
 
   oChangeUserStatus(id: string) {

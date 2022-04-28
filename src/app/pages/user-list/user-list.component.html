@@ -91,6 +91,7 @@
     </div>
   </div>
 </div>
+
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
@@ -113,7 +114,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr **ngFor="let item of userlist">
+              <tr *ngFor="let item of userlist">
                 <td>
                     {{item.firstName}}
                 </td>
@@ -181,4 +182,32 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+  <h1>Angular 13 HTML Table Example</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of userlist">
+        <th>{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.address }}</td>
+        <td>
+          <button type="button">Edit</button>
+          <button type="button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
