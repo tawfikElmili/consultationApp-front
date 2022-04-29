@@ -1,7 +1,6 @@
 import { UserModel } from './../../shared/models/UserModel';
 import { UserService } from './../../shared/Services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +13,7 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe((res) => {
+    this.userService.getAllUsers().subscribe((res : UserModel[]) => {
       console.log(res)
       this.userlist = res;
     });

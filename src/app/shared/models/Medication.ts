@@ -1,5 +1,5 @@
-export class Medication {
-    consultationId: string;
+export class MedicationModel {
+    id: string;
     designation: string;
     note: string;
 }
