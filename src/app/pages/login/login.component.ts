@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   login: loginModel
   worngPassOrEmail: boolean = false;
   submitted = true;
+  msg: any;
   constructor(private userService: UserService, private router: Router) {
     this.login = new loginModel();
     localStorage.clear();
@@ -21,11 +22,11 @@ export class LoginComponent implements OnInit {
   onLogin(form: NgForm) {
     if (form.valid) {
       this.userService.login(this.login).subscribe(data => {
-        console.log(data)
         const resSTR = JSON.stringify(data);
         const resJSON = JSON.parse(resSTR);
         if (resJSON.status === 'err') {
-          this.worngPassOrEmail = false;
+          this.worngPassOrEmail = true;
+          this.msg = resJSON.message ;
         } else {
           this.worngPassOrEmail = false;
           localStorage.setItem('currentUser', JSON.stringify(resJSON.UserData[0]));

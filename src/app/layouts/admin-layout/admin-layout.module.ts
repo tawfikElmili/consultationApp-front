@@ -27,7 +27,6 @@ import { MedicationAddModalComponent } from 'src/app/pages/medication-add-modal/
     NgbModule,
     ClipboardModule
   ],
-  entryComponents: [ MedicationAddModalComponent ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
@@ -37,7 +36,6 @@ import { MedicationAddModalComponent } from 'src/app/pages/medication-add-modal/
     ConsultationAddComponent,
     ConsultationListComponent,
     UserListComponent,
-    MedicationAddModalComponent
   ]
 })
 

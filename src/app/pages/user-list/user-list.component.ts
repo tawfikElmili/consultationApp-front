@@ -10,17 +10,26 @@ import { Component, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
 
   userlist: UserModel[] = [];
-  constructor(private userService: UserService) { }
+  user : UserModel ;
+  constructor(private userService: UserService) {
+    this.user = new UserModel(); }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe((res : UserModel[]) => {
-      console.log(res)
-      this.userlist = res;
-    });
+
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.getAllUser();
   }
 
   oChangeUserStatus(item: UserModel) {
-    this.userService.oChangeUserStatus(item._id).subscribe((data) => {
+    console.log(item._id)
+    this.userService.oChangeUserStatus(item).subscribe((data) => {
+      this.getAllUser();
+    });
+  }
+  getAllUser() {
+    this.userService.getAllUsers().subscribe((res : UserModel[]) => {
+      console.log(res)
+      this.userlist = res;
     });
   }
 

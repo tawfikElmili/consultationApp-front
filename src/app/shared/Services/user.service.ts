@@ -46,10 +46,16 @@ export class UserService {
      .pipe(retry(1), catchError(this.processError));
   }
 
-  oChangeUserStatus(id: string) {
+  UpdateUser(user:UserModel) : Observable<UserModel[]>  {
+    return this.http.post<UserModel[]>(environment.endpoint + '/users/update', user,this.httpHeader)
+     .pipe(retry(1), catchError(this.processError));
+  }
+
+  oChangeUserStatus(id) {
     return this.http.post(environment.endpoint + '/users/giveAccess', id, this.options)
       .pipe(retry(1), catchError(this.processError));
   }
+
 
   processError(err: any) {
     let message = '';

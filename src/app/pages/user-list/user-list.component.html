@@ -102,13 +102,15 @@
           <h3 class="mb-0">List of Users</h3>
         </div>
         <div class="table-responsive">
-          <table class="table align-items-center table-flush">
+          <table class="table align-items-center table-flush table-striped">
             <thead class="thead-light">
               <tr>
                 <th >FirstName</th>
                 <th >LastName</th>
                 <th >Email</th>
+                <th >Num Tel</th>
                 <th >Gender</th>
+                <th >Role</th>
                 <th >Status</th>
                 <th > Action</th>
               </tr>
@@ -133,21 +135,21 @@
                <td>
                   {{item.role}}
               </td>
-                <td [hidden]="item.status">
+                <td [hidden]="!item.status">
                   <span class="badge badge-dot mr-4" >
-                    <i class="bg-warning"> Enable</i> pending
+                    <i class="bg-warning"> </i> Enable
                   </span>
                 </td>
-                 <td [hidden]="!item.status">
+                 <td [hidden]="item.status">
                   <span class="badge badge-dot mr-4" >
-                    <i class="bg-warning"> Disable</i> pending
+                    <i class="bg-warning"></i> Disable
                   </span>
                 </td>
                 <td>
                   <div>
-                    <i class="bi bi-pen" [routerLink]="['/user-profile']" routerLinkActive="router-link-active"  > Edit </i>
-                    <i class="check-bold" (click)="oChangeUserStatus(item)" [hidden]="item.status"> Enable </i>
-                    <i class="fat-remove"  [hidden]="!item.status"> Disable </i>
+                    <button class="btn btn-outline-info" [routerLink]="['/user-profile']" routerLinkActive="router-link-active" [hidden]="!(user._id == item._id)"  > Edit </button>
+                      <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user._id == item._id)" [hidden]="item.status"> Enable </button>
+                        <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user._id == item._id)"  [hidden]="!item.status"> Disable </button>
                   </div>
                 </td>
                </tr>
