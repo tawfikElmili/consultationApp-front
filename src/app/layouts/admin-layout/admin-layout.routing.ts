@@ -12,4 +12,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-list', component: UserListComponent },
     { path: 'consultation-list', component: ConsultationListComponent },
     { path: 'consultation-add', component: ConsultationAddComponent },
+    { path: 'consultation-edit/:id', component: ConsultationAddComponent },
 ];

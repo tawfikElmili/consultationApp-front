@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { MedicationAddModalComponent } from './pages/medication-add-modal/medication-add-modal.component';
 
 
 @NgModule({
@@ -26,12 +25,10 @@ import { MedicationAddModalComponent } from './pages/medication-add-modal/medica
     RouterModule,
     AppRoutingModule
   ],
-  entryComponents: [ MedicationAddModalComponent ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    MedicationAddModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

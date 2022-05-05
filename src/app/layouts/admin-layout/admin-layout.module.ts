@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultationAddComponent } from 'src/app/pages/consultation-add/consultation-add.component';
 import { ConsultationListComponent } from 'src/app/pages/consultation-list/consultation-list.component';
 import { UserListComponent } from 'src/app/pages/user-list/user-list.component';
-import { MedicationAddModalComponent } from 'src/app/pages/medication-add-modal/medication-add-modal.component';
+import { ConsultationEditComponent } from 'src/app/pages/consultation-edit/consultation-edit.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -34,6 +34,7 @@ import { MedicationAddModalComponent } from 'src/app/pages/medication-add-modal/
     IconsComponent,
     MapsComponent,
     ConsultationAddComponent,
+    ConsultationEditComponent,
     ConsultationListComponent,
     UserListComponent,
   ]

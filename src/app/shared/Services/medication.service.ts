@@ -29,6 +29,14 @@ export class MedicationService {
       .pipe(retry(1), catchError(this.processError));
   }
 
+  getById(id: any): Observable<MedicationModel> {
+    return this.http.post<MedicationModel>(environment.endpoint + '/medication/getById',
+      id,
+      this.httpHeader
+    )
+      .pipe(retry(1), catchError(this.processError));
+  }
+
   processError(err: any) {
     let message = '';
     if (err.error instanceof ErrorEvent) {
