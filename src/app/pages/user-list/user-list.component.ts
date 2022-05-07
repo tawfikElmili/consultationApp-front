@@ -21,8 +21,8 @@ export class UserListComponent implements OnInit {
   }
 
   oChangeUserStatus(item: UserModel) {
-    console.log(item._id)
-    this.userService.oChangeUserStatus(item).subscribe((data) => {
+    console.log(item.id)
+    this.userService.oChangeUserStatus(item.id).subscribe((data) => {
       this.getAllUser();
     });
   }

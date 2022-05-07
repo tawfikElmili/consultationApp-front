@@ -11,28 +11,30 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-consultation-edit",
-  templateUrl: "./consultation-edit.component.html"
+  templateUrl: "./consultation-edit.component.html",
 })
 export class ConsultationEditComponent implements OnInit {
   userList: UserModel[] = [];
   medicationListModifier: MedicationModel[] = [];
-  medication: MedicationModel;
   consultation: ConsultationModel;
-  consultationId: any;
+  consultationModifier: ConsultationModel;
+  consultationId: number;
+  modifier: boolean;
+  medication: MedicationModel;
 
   constructor(
     private userService: UserService,
     private medicationService: MedicationService,
     private consultationService: ConsultationService,
-    private route : ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.consultation = new ConsultationModel();
     this.medication = new MedicationModel();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(param=>{
-      this.consultationId = param;
+    this.route.params.subscribe((param) => {
+      this.consultationId = +param;
       this.getById(this.consultationId);
     });
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
@@ -40,29 +42,30 @@ export class ConsultationEditComponent implements OnInit {
       this.userList = res;
     });
 
-
-
-    if(this.consultation.medicationList.length == 0){
-
-    const medication = new MedicationModel()
-    this.consultation.medicationList.push(medication);
+    if (this.consultation.medicationList.length == 0) {
+      const medication = new MedicationModel();
+      this.consultation.medicationList.push(medication);
     }
   }
-  getById(id:any){
-      this.consultationService.getById(id).subscribe(data=>{
-        this.consultation = data ;
-        this.medicationService.save
-
-      })
+  getById(id: number) {
+    this.consultationService
+      .getById(id)
+      .subscribe((data: ConsultationModel) => {
+        this.consultation = data;
+      });
   }
-  onSubmit(form: NgForm) {
+  onUpdate(form: NgForm) {
     if (form.valid) {
-      console.log(this.consultation)
+      console.log(this.consultation);
       this.consultationService.save(this.consultation).subscribe(() => {});
     }
   }
-  onCancel(form: NgForm) {
-    form.reset();
+  onCancel() {
+    this.modifier = false;
+    this.consultation = this.consultationModifier ;
+  }
+  onEdit(){
+    this.modifier = true;
   }
 
   onEditMed(item: MedicationModel) {
@@ -71,22 +74,21 @@ export class ConsultationEditComponent implements OnInit {
     this.medicationListModifier = this.consultation.medicationList;
   }
   onDeleteMed(item: MedicationModel) {
-    const index = this.consultation.medicationList.indexOf(item,1);
+    const index = this.consultation.medicationList.indexOf(item, 1);
     if (index == -1) {
-      this.consultation.medicationList.splice(index,0);
-
+      this.consultation.medicationList.splice(index, 0);
     }
-    this.medication.modifier= false ;
+    this.medication.modifier = false;
   }
   onSaveMed(item: MedicationModel) {
     const index = this.consultation.medicationList.indexOf(item);
     if (index == -1) {
       this.consultation.medicationList[index] = this.medication;
     }
-    item.modifier= false ;
+    item.modifier = false;
   }
   onAddMed() {
-    const medication = new MedicationModel()
+    const medication = new MedicationModel();
     this.consultation.medicationList.push(medication);
   }
 }

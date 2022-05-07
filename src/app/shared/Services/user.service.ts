@@ -46,12 +46,17 @@ export class UserService {
      .pipe(retry(1), catchError(this.processError));
   }
 
-  UpdateUser(user:UserModel) : Observable<UserModel[]>  {
-    return this.http.post<UserModel[]>(environment.endpoint + '/users/update', user,this.httpHeader)
+  UpdateUser(user:UserModel) : Observable<UserModel>  {
+    return this.http.post<UserModel>(environment.endpoint + '/users/update', user,this.options)
      .pipe(retry(1), catchError(this.processError));
   }
 
-  oChangeUserStatus(id) {
+  getUserById(user:UserModel) : Observable<UserModel>  {
+    return this.http.post<UserModel>(environment.endpoint + '/users/getById', user,this.options)
+     .pipe(retry(1), catchError(this.processError));
+  }
+
+  oChangeUserStatus(id:number) {
     return this.http.post(environment.endpoint + '/users/giveAccess', id, this.options)
       .pipe(retry(1), catchError(this.processError));
   }

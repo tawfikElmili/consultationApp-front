@@ -29,7 +29,7 @@ export class ConsultationService {
       )
       .pipe(retry(1), catchError(this.processError));
   }
-  getById(id: any) {
+  getById(id: number) {
     return this.http
       .post<ConsultationModel>(
         environment.endpoint + "/consultation/getById",

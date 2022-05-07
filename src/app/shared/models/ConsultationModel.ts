@@ -1,7 +1,7 @@
 import { MedicationModel } from "./Medication";
 
 export class ConsultationModel {
-    _id :any;
+    id :number;
     userId: string;
     userAffectId: string;
     medicationList: MedicationModel[]=[]

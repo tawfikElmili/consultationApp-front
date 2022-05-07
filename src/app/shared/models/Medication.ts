@@ -1,5 +1,5 @@
 export class MedicationModel {
-    id: string;
+    id: number;
     designation: string;
     note: string;
     modifier:boolean;

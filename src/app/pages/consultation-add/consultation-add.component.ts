@@ -8,6 +8,7 @@ import { MedicationService } from "src/app/shared/Services/medication.service";
 import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
 import { ConsultationService } from "src/app/shared/Services/consultation.service";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-consultation-add",
@@ -24,7 +25,7 @@ export class ConsultationAddComponent implements OnInit {
     private userService: UserService,
     private medicationService: MedicationService,
     private consultationService: ConsultationService,
-    private router : Router
+    private router: Router
   ) {
     this.consultation = new ConsultationModel();
     this.medication = new MedicationModel();
@@ -44,9 +45,9 @@ export class ConsultationAddComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      console.log(this.consultation);
       this.consultationService.save(this.consultation).subscribe((data) => {
-        this.router.navigate['/consultation-edit/'+ data._id]
+        Swal.fire("Success!", " consultation has been saved.", "success");
+        this.router.navigate(["/consultation-edit/" + data.id]);
       });
     }
   }
