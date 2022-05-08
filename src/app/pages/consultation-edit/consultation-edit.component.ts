@@ -36,7 +36,7 @@ export class ConsultationEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((param) => {
       this.consultationId = +param.id;
-      this.getById(this.consultationId);
+      this.getConsultationById(this.consultationId);
     });
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
       console.log(res);
@@ -49,11 +49,20 @@ export class ConsultationEditComponent implements OnInit {
     }
   }
   // get conultation by id
-  getById(id: number) {
+  getConsultationById(id: number) {
     this.consultationService
-      .getById(id)
+      .getConsultationById(id)
       .subscribe((data: ConsultationModel) => {
         this.consultation = data;
+        this.getMedicationsByConsultation(this.consultation.id);
+      });
+  }
+  // get conultation by id
+  getMedicationsByConsultation(id: number) {
+    this.medicationService
+      .getMedicationsByConsultation(id)
+      .subscribe((data) => {
+        this.consultation.medicationList = data;
       });
   }
 
@@ -83,7 +92,7 @@ export class ConsultationEditComponent implements OnInit {
         Swal.fire("Success!", " consultation has been saved.", "success");
       });
 
-    this.modifier = false;
+      this.modifier = false;
     }
   }
 

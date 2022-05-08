@@ -3,7 +3,6 @@ import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
 import { UserModel } from "src/app/shared/models/UserModel";
 import { ConsultationService } from "src/app/shared/Services/consultation.service";
 import { UserService } from "src/app/shared/Services/user.service";
-
 import Swal from "sweetalert2";
 @Component({
   selector: "app-consultation-list",
@@ -20,6 +19,8 @@ export class ConsultationListComponent implements OnInit {
     private userService: UserService
   ) {
     this.user = new UserModel();
+
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class ConsultationListComponent implements OnInit {
   }
 
   getAll() {
+    console.log(this.user)
     this.consultationService.getAll(this.user).subscribe((data) => {
       this.consultationList = data;
       console.log(data);

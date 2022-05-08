@@ -36,6 +36,14 @@ export class MedicationService {
     )
       .pipe(retry(1), catchError(this.processError));
   }
+  getMedicationsByConsultation(id: number): Observable<MedicationModel[]> {
+    return this.http
+      .get<MedicationModel[]>(
+        environment.endpoint + "/medication/getByConsultation/" + +id,
+        this.options
+      )
+      .pipe(retry(1), catchError(this.processError));
+  }
 
   processError(err: any) {
     let message = '';

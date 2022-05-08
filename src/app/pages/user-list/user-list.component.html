@@ -93,23 +93,26 @@
                <td>
                   {{item.role}}
               </td>
-                <td [hidden]="!item.status">
+                <td [hidden]="!item.status" width="10%">
                   <span class="badge badge-dot mr-4" >
                     <i class="bg-warning"> </i> Enable
                   </span>
                 </td>
-                 <td [hidden]="item.status">
+                 <td [hidden]="item.status" width="10%">
                   <span class="badge badge-dot mr-4" >
                     <i class="bg-warning"></i> Disable
                   </span>
                 </td>
-                <td>
+                <td width="10%">
                   <div>
                     <button class="btn btn-outline-info" [routerLink]="['/user-profile']" routerLinkActive="router-link-active" [hidden]="!(user.id == item.id)"  > Edit </button>
                       <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user.id == item.id)" [hidden]="item.status"> Enable </button>
                         <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user.id == item.id)"  [hidden]="!item.status"> Disable </button>
                   </div>
                 </td>
+                <td width="10%" [hidden]="hideDelete" >
+                  <button (click)="onDelete(item)"  class="btn btn-outline-info"> Delete</button>
+               </td>
                </tr>
             </tbody>
           </table>

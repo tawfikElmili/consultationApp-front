@@ -112,7 +112,7 @@
               <label> User Affect</label>
             </div>
             <div class="col-md-2">
-              <select [(ngModel)]="consultation.userAffectId" #userAffectId="ngModel" required name="userAffectId"
+              <select [(ngModel)]="consultation.userAffectId" disabled #userAffectId="ngModel" required name="userAffectId"
                 class=" form-control ">
                 <option *ngFor=" let item of userList" [ngValue]="item.id">
                   {{item.firstName}} {{item.lastName}}

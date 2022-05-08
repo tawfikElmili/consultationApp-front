@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { Observable, retry, catchError, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { UserModel } from "../models/UserModel";
+import { MedicationModel } from "../models/Medication";
 
 @Injectable({
   providedIn: "root",
@@ -29,7 +30,7 @@ export class ConsultationService {
       )
       .pipe(retry(1), catchError(this.processError));
   }
-  getById(id: number) {
+  getConsultationById(id: number) : Observable<ConsultationModel> {
     return this.http
       .get<ConsultationModel>(
         environment.endpoint + "/consultation/getById/" + +id,
@@ -37,6 +38,7 @@ export class ConsultationService {
       )
       .pipe(retry(1), catchError(this.processError));
   }
+
   save(cons: ConsultationModel): Observable<ConsultationModel> {
     return this.http
       .post<ConsultationModel>(
@@ -49,7 +51,7 @@ export class ConsultationService {
   onDelete(id: number): Observable<any> {
     return this.http
       .delete(
-        environment.endpoint + "/consultation/delete/" + +id,
+        environment.endpoint + "/delete/" + +id,
         this.options
       )
       .pipe(retry(1), catchError(this.processError));
