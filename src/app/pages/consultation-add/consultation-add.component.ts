@@ -33,7 +33,6 @@ export class ConsultationAddComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
-      console.log(res);
       this.userList = res;
     });
 

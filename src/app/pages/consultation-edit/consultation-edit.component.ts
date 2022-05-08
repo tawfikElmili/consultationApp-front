@@ -8,6 +8,7 @@ import { MedicationService } from "src/app/shared/Services/medication.service";
 import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
 import { ConsultationService } from "src/app/shared/Services/consultation.service";
 import { ActivatedRoute } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-consultation-edit",
@@ -34,7 +35,7 @@ export class ConsultationEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((param) => {
-      this.consultationId = +param;
+      this.consultationId = +param.id;
       this.getById(this.consultationId);
     });
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
@@ -47,6 +48,7 @@ export class ConsultationEditComponent implements OnInit {
       this.consultation.medicationList.push(medication);
     }
   }
+  // get conultation by id
   getById(id: number) {
     this.consultationService
       .getById(id)
@@ -54,20 +56,38 @@ export class ConsultationEditComponent implements OnInit {
         this.consultation = data;
       });
   }
-  onUpdate(form: NgForm) {
-    if (form.valid) {
-      console.log(this.consultation);
-      this.consultationService.save(this.consultation).subscribe(() => {});
-    }
+
+  onEdit() {
+    this.modifier = true;
+    this.consultationModifier = new ConsultationModel();
+    this.consultationModifier.id = this.consultation.id;
+    this.consultationModifier.description = this.consultation.description;
+    this.consultationModifier.observation = this.consultation.observation;
+    this.consultationModifier.title = this.consultation.title;
+    this.consultationModifier.userAffectId = this.consultation.userAffectId;
+    this.consultationModifier.medicationList = this.consultation.medicationList;
   }
   onCancel() {
+    this.consultation.id = this.consultationModifier.id;
+    this.consultation.description = this.consultationModifier.description;
+    this.consultation.observation = this.consultationModifier.observation;
+    this.consultation.title = this.consultationModifier.title;
+    this.consultation.userAffectId = this.consultationModifier.userAffectId;
+    this.consultation.medicationList = this.consultationModifier.medicationList;
+    this.consultationModifier = new ConsultationModel();
     this.modifier = false;
-    this.consultation = this.consultationModifier ;
   }
-  onEdit(){
-    this.modifier = true;
+  onUpdate(form: NgForm) {
+    if (form.valid) {
+      this.consultationService.save(this.consultation).subscribe(() => {
+        Swal.fire("Success!", " consultation has been saved.", "success");
+      });
+
+    this.modifier = false;
+    }
   }
 
+  // medications methods
   onEditMed(item: MedicationModel) {
     item.modifier = true;
     this.medicationListModifier = [];

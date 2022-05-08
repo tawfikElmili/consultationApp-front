@@ -36,7 +36,7 @@
             <span>My profile</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a routerLinkActive="active" [routerLink]="['/login']" class="dropdown-item">
+          <a routerLinkActive="active" (click)="logout()" [routerLink]="['/login']" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>

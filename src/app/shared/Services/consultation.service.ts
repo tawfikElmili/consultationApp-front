@@ -20,20 +20,19 @@ export class ConsultationService {
     }),
   };
 
-  getAll() {
+  getAll(user :UserModel) {
     return this.http
       .post<ConsultationModel[]>(
         environment.endpoint + "/consultation/getAll",
-        {},
+        user,
         this.options
       )
       .pipe(retry(1), catchError(this.processError));
   }
   getById(id: number) {
     return this.http
-      .post<ConsultationModel>(
-        environment.endpoint + "/consultation/getById",
-        id,
+      .get<ConsultationModel>(
+        environment.endpoint + "/consultation/getById/" + +id,
         this.options
       )
       .pipe(retry(1), catchError(this.processError));
@@ -43,6 +42,14 @@ export class ConsultationService {
       .post<ConsultationModel>(
         environment.endpoint + "/consultation/add",
         cons,
+        this.options
+      )
+      .pipe(retry(1), catchError(this.processError));
+  }
+  onDelete(id: number): Observable<any> {
+    return this.http
+      .delete(
+        environment.endpoint + "/consultation/delete/" + +id,
         this.options
       )
       .pipe(retry(1), catchError(this.processError));
