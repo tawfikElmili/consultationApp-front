@@ -9,6 +9,8 @@ import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
 import { ConsultationService } from "src/app/shared/Services/consultation.service";
 import { ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: "app-consultation-edit",
@@ -58,11 +60,12 @@ export class ConsultationEditComponent implements OnInit {
       });
   }
   // get conultation by id
-  getMedicationsByConsultation(id: number) {
+  async getMedicationsByConsultation(id: number) {
     this.medicationService
       .getMedicationsByConsultation(id)
       .subscribe((data) => {
         this.consultation.medicationList = data;
+        console.log(data)
       });
   }
 
@@ -119,5 +122,18 @@ export class ConsultationEditComponent implements OnInit {
   onAddMed() {
     const medication = new MedicationModel();
     this.consultation.medicationList.push(medication);
+  }
+
+  public openPDF(): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('angular-demo.pdf');
+    });
   }
 }

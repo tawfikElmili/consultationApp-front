@@ -49,9 +49,11 @@
     </div>
   </div>
 </div>
-
+<div class="col-md-4 text-right">
+  <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+</div>
 <form #form="ngForm">
-  <div class="container-fluid mt--7">
+  <div class="container-fluid mt--7" id="htmlData">
     <!-- Table -->
     <div class="row">
       <div class="col">
