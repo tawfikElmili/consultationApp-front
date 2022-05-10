@@ -48,6 +48,16 @@ export class ConsultationService {
       )
       .pipe(retry(1), catchError(this.processError));
   }
+
+  update(cons: ConsultationModel): Observable<ConsultationModel> {
+    return this.http
+      .post<ConsultationModel>(
+        environment.endpoint + "/consultation/update",
+        cons,
+        this.options
+      )
+      .pipe(retry(1), catchError(this.processError));
+  }
   onDelete(id: number): Observable<any> {
     return this.http
       .delete(

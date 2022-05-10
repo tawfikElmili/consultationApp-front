@@ -49,9 +49,6 @@
     </div>
   </div>
 </div>
-<div class="col-md-4 text-right">
-  <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
-</div>
 <form #form="ngForm">
   <div class="container-fluid mt--7" id="htmlData">
     <!-- Table -->
@@ -69,8 +66,8 @@
                     <button type="button" (click)="onCancel()" name="cancelConsult"
                       class="btn btn-outline-danger">Cancel</button>
                   </div>
-                  <div class="col" [hidden]="modifier">
-                    <button type="button" (click)="onEdit()" name="edit" class="btn btn-outline-info">edit</button>
+                  <div class="col" [hidden]="modifier ">
+                    <button type="button" (click)="onEdit()" [hidden]="user.role !=='DOCTOR'"  name="edit" class="btn btn-outline-info">edit</button>
                   </div>
                   <div class="col" [hidden]="!modifier">
                     <button type="button" class="btn btn-outline-success" (click)="onUpdate(form) " name="saveConsult"> save
@@ -79,7 +76,10 @@
                 </div>
               </div>
             </div>
-
+              <div >
+                <button type="button" class="btn btn-outline-warning" (click)="openPDF()"> Export
+                </button>
+              </div>
 
           </div>
 

@@ -24,6 +24,7 @@ export class ConsultationEditComponent implements OnInit {
   consultationId: number;
   modifier: boolean;
   medication: MedicationModel;
+  user: UserModel;
 
   constructor(
     private userService: UserService,
@@ -33,6 +34,9 @@ export class ConsultationEditComponent implements OnInit {
   ) {
     this.consultation = new ConsultationModel();
     this.medication = new MedicationModel();
+
+    this.user = new UserModel();
+    this.user = JSON.parse(localStorage.getItem("currentUser"));
   }
 
   ngOnInit() {
@@ -65,7 +69,7 @@ export class ConsultationEditComponent implements OnInit {
       .getMedicationsByConsultation(id)
       .subscribe((data) => {
         this.consultation.medicationList = data;
-        console.log(data)
+        console.log("medacation",data)
       });
   }
 
@@ -91,8 +95,8 @@ export class ConsultationEditComponent implements OnInit {
   }
   onUpdate(form: NgForm) {
     if (form.valid) {
-      this.consultationService.save(this.consultation).subscribe(() => {
-        Swal.fire("Success!", " consultation has been saved.", "success");
+      this.consultationService.update(this.consultation).subscribe(() => {
+        Swal.fire("Success!", " consultation has been updated.", "success");
       });
 
       this.modifier = false;

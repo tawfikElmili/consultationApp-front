@@ -23,19 +23,28 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {}
   getUserById() {
+    console.log(this.user)
     this.userService.getUserById(this.user).subscribe((data: UserModel) => {
-       localStorage.setItem('currentUser', JSON.stringify(data));
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      //  localStorage.setItem('currentUser', JSON.stringify(data));
+      // this.user = JSON.parse(localStorage.getItem('currentUser'));
     });
   }
   onCancel() {
     this.modifier = false;
-    this.user = this.userModifier;
-    this.userModifier = new UserModel();
+    this.user.id = this.userModifier.id;
+    this.user.email = this.userModifier.email;
+    this.user.firstName = this.userModifier.firstName;
+    this.user.lastName = this.userModifier.lastName;
+    this.user.numTel = this.userModifier.numTel;
   }
   onEdit() {
     this.modifier = true;
-    this.userModifier = this.user;
+    this.userModifier = new UserModel();
+    this.userModifier.id = this.user.id;
+    this.userModifier.email = this.user.email;
+    this.userModifier.firstName = this.user.firstName;
+    this.userModifier.lastName = this.user.lastName;
+    this.userModifier.numTel = this.user.numTel;
   }
   onUpdate(form: NgForm) {
     if (form.valid) {
