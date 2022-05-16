@@ -44,6 +44,14 @@ export class MedicationService {
       )
       .pipe(retry(1), catchError(this.processError));
   }
+  onDelete(id: number): Observable<any> {
+    return this.http
+      .delete(
+        environment.endpoint + "/medication/delete/" + +id,
+        this.options
+      )
+      .pipe(retry(1), catchError(this.processError));
+  }
 
   processError(err: any) {
     let message = '';

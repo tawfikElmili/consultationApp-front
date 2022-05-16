@@ -2,7 +2,6 @@ import { NgForm } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { UserModel } from "src/app/shared/models/UserModel";
 import { UserService } from "src/app/shared/Services/user.service";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { MedicationModel } from "src/app/shared/models/Medication";
 import { MedicationService } from "src/app/shared/Services/medication.service";
 import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
@@ -33,7 +32,9 @@ export class ConsultationAddComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
-      this.userList = res;
+      this.userList = res.filter(u=>
+        u.role !== "DOCTOR"
+      );
     });
 
     if (this.consultation.medicationList.length == 0) {
@@ -62,6 +63,9 @@ export class ConsultationAddComponent implements OnInit {
   onDeleteMed(item: MedicationModel) {
     const index = this.consultation.medicationList.indexOf(item, 1);
     if (index == -1) {
+      this.medicationService.onDelete(item.id).subscribe(
+
+      );
       this.consultation.medicationList.splice(index, 0);
     }
     this.medication.modifier = false;

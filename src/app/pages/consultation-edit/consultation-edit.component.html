@@ -50,7 +50,7 @@
   </div>
 </div>
 <form #form="ngForm">
-  <div class="container-fluid mt--7" id="htmlData">
+  <div class="container-fluid mt--7">
     <!-- Table -->
     <div class="row">
       <div class="col">
@@ -82,7 +82,7 @@
               </div>
 
           </div>
-
+      <div  id="htmlData">
           <div class="form-group row">
             <div class="col-md-2  ml-4">
               <label> Title</label>
@@ -172,11 +172,11 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <button (click)="onAddMed()" type="button" class="btn btn-outline-success">Add</button>
+                  <button (click)="onAddMed()" [hidden]="modifier" type="button" class="btn btn-outline-success">Add</button>
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </div>
       </div>
     </div>

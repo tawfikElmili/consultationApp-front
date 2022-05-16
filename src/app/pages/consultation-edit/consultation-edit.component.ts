@@ -9,8 +9,8 @@ import { ConsultationModel } from "src/app/shared/models/ConsultationModel";
 import { ConsultationService } from "src/app/shared/Services/consultation.service";
 import { ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: "app-consultation-edit",
@@ -45,7 +45,6 @@ export class ConsultationEditComponent implements OnInit {
       this.getConsultationById(this.consultationId);
     });
     this.userService.getAllUsers().subscribe((res: UserModel[]) => {
-      console.log(res);
       this.userList = res;
     });
 
@@ -64,12 +63,12 @@ export class ConsultationEditComponent implements OnInit {
       });
   }
   // get conultation by id
-  async getMedicationsByConsultation(id: number) {
+  getMedicationsByConsultation(id: number) {
     this.medicationService
       .getMedicationsByConsultation(id)
       .subscribe((data) => {
         this.consultation.medicationList = data;
-        console.log("medacation",data)
+        console.log("medacation", data);
       });
   }
 
@@ -110,6 +109,26 @@ export class ConsultationEditComponent implements OnInit {
     this.medicationListModifier = this.consultation.medicationList;
   }
   onDeleteMed(item: MedicationModel) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: 'You won"t be able to revert this!',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        this.userService.onDelete(item.id).subscribe(() => {});
+        const index = this.consultation.medicationList.indexOf(item, 1);
+        if (index > -1) {
+          this.consultation.medicationList.splice(index, 0);
+          this.medication.modifier = false;
+        }
+        Swal.fire("Success!", "medication has been deleted.", "success");
+      }
+    });
+
     const index = this.consultation.medicationList.indexOf(item, 1);
     if (index == -1) {
       this.consultation.medicationList.splice(index, 0);
@@ -129,15 +148,15 @@ export class ConsultationEditComponent implements OnInit {
   }
 
   public openPDF(): void {
-    let DATA: any = document.getElementById('htmlData');
+    let DATA: any = document.getElementById("htmlData");
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 208;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
-      let PDF = new jsPDF('p', 'mm', 'a4');
+      const FILEURI = canvas.toDataURL("image/png");
+      let PDF = new jsPDF("p", "mm", "a4");
       let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('angular-demo.pdf');
+      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+      PDF.save("Orodonance_Num.pdf");
     });
   }
 }
