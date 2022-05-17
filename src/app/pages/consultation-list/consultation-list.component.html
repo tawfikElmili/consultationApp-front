@@ -45,7 +45,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -64,8 +63,8 @@
           <table class="table align-items-center table-flush table-striped">
             <thead class="thead-light">
               <tr>
-                <th >Title</th>
-                <th >Observation</th>
+                <th>Title</th>
+                <th>Observation</th>
                 <!-- <th >Description</th> -->
                 <th colspan="2"></th>
               </tr>
@@ -73,21 +72,21 @@
             <tbody>
               <tr *ngFor="let item of consultationList">
                 <td width="20%">
-                    {{item.title}}
+                  {{item.title}}
                 </td>
                 <td style="white-space: pre-wrap;" width="60%">
                   {{item.observation}}
-              </td>
-              <!-- <td style="white-space: pre-wrap;">
+                </td>
+                <!-- <td style="white-space: pre-wrap;">
                   {{item.description}}
               </td> -->
-               <td width="10%">
-                 <button routerLink="/consultation-edit/{{item.id}}"  class="btn btn-outline-info"> more detail</button>
-              </td>
-              <td width="10%" [hidden]="hideDelete" >
-                <button (click)="onDelete(item)"  class="btn btn-outline-info"> Delete</button>
-             </td>
-               </tr>
+                <td width="10%">
+                  <button routerLink="/consultation-edit/{{item.id}}" class="btn btn-outline-info"> more detail</button>
+                </td>
+                <td width="10%" [hidden]="hideDelete">
+                  <button (click)="onDelete(item)" class="btn btn-outline-info"> Delete</button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -106,7 +105,6 @@
               <li class="page-item">
                 <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
               </li>
-
               <li class="page-item">
                 <a class="page-link" href="javascript:void(0)">
                   <i class="fas fa-angle-right"></i>

@@ -47,7 +47,7 @@ export class UserService {
 
   getUsersSelectedList(): Observable<UserModel[]> {
     return this.http
-      .post<UserModel[]>(environment.endpoint + "/users/all", this.httpHeader)
+      .post<UserModel[]>(environment.endpoint + "/users/getAllSelectList", this.httpHeader)
       .pipe(retry(1), catchError(this.processError));
   }
 
