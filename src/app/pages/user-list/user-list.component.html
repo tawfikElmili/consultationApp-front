@@ -106,8 +106,8 @@
                 <td width="10%">
                   <div>
                     <button class="btn btn-outline-info" [routerLink]="['/user-profile']" routerLinkActive="router-link-active" [hidden]="!(user.id == item.id)"  > Edit </button>
-                      <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user.id == item.id)" [hidden]="item.status"> Enable </button>
-                        <button class="btn btn-outline-info" (click)="oChangeUserStatus(item)" [hidden]="!(user.id == item.id)"  [hidden]="!item.status"> Disable </button>
+                      <button class="btn btn-outline-info" (click)="onChangeUserStatus(item)" [hidden]="!(user.id == item.id)" [hidden]="item.status"> Enable </button>
+                        <button class="btn btn-outline-info" (click)="onChangeUserStatus(item)" [hidden]="!(user.id == item.id)"  [hidden]="!item.status"> Disable </button>
                   </div>
                 </td>
                 <td width="10%" [hidden]="hideDelete" >

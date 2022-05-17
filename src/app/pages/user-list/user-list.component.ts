@@ -20,14 +20,28 @@ export class UserListComponent implements OnInit {
     this.getAllUser();
   }
 
-  oChangeUserStatus(item: UserModel) {
-    this.userService.oChangeUserStatus(item).subscribe((data) => {
-      this.getAllUser();
+  onChangeUserStatus(item: UserModel) {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: '',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, updated it!",
+    }).then((result) => {
+      if (result.value) {
+        this.userService.oChangeUserStatus(item).subscribe((data) => {
+          this.getAllUser();
+        });
+        Swal.fire("Success!", "User has been updated.", "success");
+
+      }
     });
   }
   getAllUser() {
     this.userService.getAllUsers().subscribe((res : UserModel[]) => {
-      console.log(res)
       this.userlist = res;
     });
   }

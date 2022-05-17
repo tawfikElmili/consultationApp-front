@@ -8,6 +8,10 @@ export class UserModel {
     gender: string;
     role: string;
     status: boolean
+    constructor(){
+      this.gender = "MALE";
+      this.role ="DOCTOR";
+    }
 }
 export class loginModel {
     email: string;
