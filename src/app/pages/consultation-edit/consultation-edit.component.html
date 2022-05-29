@@ -155,7 +155,7 @@
                                 <button type="button" (click)="onDeleteMed()" name="cancel{{i}}" id="cancel{{i}}"
                                   class="btn btn-outline-danger">Delete</button>
                               </div>
-                              <div class="col" [hidden]="item.modifier">
+                              <div class="col" [hidden]="(item.modifier || user.role !=='DOCTOR')">
                                 <button type="button" (click)="onEditMed(item)" name="edit{{i}}" id="edit{{i}}"
                                   class="btn btn-outline-info">edit</button>
                               </div>
